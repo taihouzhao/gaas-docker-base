@@ -15,5 +15,5 @@ RUN conda install xformers -c xformers/label/dev
 
 RUN pip install --no-cache-dir --upgrade diffusers[training] accelerate transformers
 
-RUN ENV HF_HOME=/HF
+ENV HF_HOME=/HF
 ENV USE_MEMORY_EFFICIENT_ATTENTION=1
