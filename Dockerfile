@@ -23,7 +23,7 @@ RUN FORCE_CUDA=1 TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6" pip whee
 RUN mkdir /out && cp /tmp/xformers/xformers-* /out/
 
 
-RUN pip install --no-cache-dir --upgrade diffusers[training] accelerate transformers
+RUN pip install --no-cache-dir --upgrade diffusers[training] accelerate transformers torchvision
 
 ENV HF_HOME=/HF
 ENV USE_MEMORY_EFFICIENT_ATTENTION=1
