@@ -11,7 +11,9 @@ ENV PATH="/root/miniconda3/bin:${PATH}"
 
 ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6"
 RUN conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch -y
-RUN conda install xformers -c xformers/label/dev
+RUN pip install ninja
+RUN pip install -v -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
+#RUN conda install xformers -c xformers/label/dev
 
 RUN pip install --no-cache-dir --upgrade diffusers[training] accelerate transformers
 
