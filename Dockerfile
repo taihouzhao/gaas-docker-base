@@ -10,9 +10,6 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 
 ENV PATH="/root/miniconda3/bin:${PATH}"
 
-RUN conda create -n xformers python=3.10
-SHELL ["conda", "run", "--no-capture-output", "-n=xformers", "/bin/bash", "-c"]
-
 WORKDIR /tmp/xformers
 RUN git clone --depth 1 https://github.com/facebookresearch/xformers.git /tmp/xformers \
     && git checkout main \
