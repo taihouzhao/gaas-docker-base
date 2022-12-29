@@ -15,12 +15,12 @@ RUN git clone --depth 1 https://github.com/facebookresearch/xformers.git /tmp/xf
     && git checkout main \
     && git submodule update --init --recursive
 
+RUN echo torchvision==0.13.0 >> requirements.txt
 RUN pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu116
 RUN FORCE_CUDA=1 TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6" pip wheel . --no-deps
 RUN mkdir /out && cp /tmp/xformers/xformers-* /out/
 
-
-RUN pip install --no-cache-dir --upgrade diffusers[training] accelerate transformers torchvision
+RUN pip install --no-cache-dir --upgrade diffusers[training] accelerate transformers
 
 ENV HF_HOME=/HF
 ENV USE_MEMORY_EFFICIENT_ATTENTION=1
