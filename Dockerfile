@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.6.1-runtime-ubuntu20.04
+FROM nvidia/cuda:11.6.1-devel-ubuntu20.04
 
 RUN apt-get update \
     && apt-get install wget git -y \
@@ -19,6 +19,3 @@ RUN pip install git+https://github.com/huggingface/diffusers
 RUN pip install --no-cache-dir accelerate transformers>=4.25.1 ftfy tensorboard modelcards
 
 ENV HF_HOME=/HF
-ENV USE_MEMORY_EFFICIENT_ATTENTION=1
-
-RUN python -m xformers.info 
