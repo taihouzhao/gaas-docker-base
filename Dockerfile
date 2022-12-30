@@ -10,15 +10,10 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 
 ENV PATH="/root/miniconda3/bin:${PATH}"
 
-WORKDIR /tmp/xformers
-RUN git clone --depth 1 https://github.com/facebookresearch/xformers.git /tmp/xformers \
-    && git checkout main \
-    && git submodule update --init --recursive
+RUN conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch -y
 
-RUN echo torchvision==0.13.0 >> requirements.txt
-RUN pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu116
-RUN FORCE_CUDA=1 TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6" pip wheel . --no-deps
-RUN mkdir /out && cp /tmp/xformers/xformers-* /out/
+RUN wget "https://github.com/ysmu/xformers-docker/releases/download/py3.10_cu11.6.1_arch6.0%3B6.1%3B6.2%3B7.0%3B7.2%3B7.5%3B8.0%3B8.6_main/xformers-0.0.15.dev0+4c06c79.d20221206-cp310-cp310-linux_x86_64.whl" \
+    && pip install xformers-0.0.15.dev0+4c06c79.d20221206-cp310-cp310-linux_x86_64.whl
 
 RUN pip install git+https://github.com/huggingface/diffusers
 RUN pip install --no-cache-dir accelerate transformers>=4.25.1 ftfy tensorboard modelcards
