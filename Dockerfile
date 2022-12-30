@@ -1,7 +1,7 @@
-FROM nvidia/cuda:11.6.1-devel-ubuntu20.04
+FROM nvidia/cuda:11.6.1-base-ubuntu20.04
 
 RUN apt-get update \
-    && apt-get install wget git g++ -y \
+    && apt-get install wget git -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
