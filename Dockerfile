@@ -10,7 +10,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 
 ENV PATH="/root/miniconda3/bin:${PATH}"
 
-RUN conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.6 -c pytorch -y
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
 
 RUN wget "https://github.com/ysmu/xformers-docker/releases/download/py3.10_cu11.6.1_arch6.0%3B6.1%3B6.2%3B7.0%3B7.2%3B7.5%3B8.0%3B8.6_main/xformers-0.0.15.dev0+4c06c79.d20221206-cp310-cp310-linux_x86_64.whl" \
     && pip install xformers-0.0.15.dev0+4c06c79.d20221206-cp310-cp310-linux_x86_64.whl
